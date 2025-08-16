@@ -1,4 +1,4 @@
-const BudgetsModel = require("../models/budegtsModel");
+const BudgetsModel = require("../models/budgetsModel");
 
 // Create a new budget
 const createBudget = async (req,res) => {

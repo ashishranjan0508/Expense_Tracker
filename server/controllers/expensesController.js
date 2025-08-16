@@ -1,4 +1,5 @@
 const expensesModel = require("../models/expensesModel");
+
 // Create a new expense
 const createExpenses = async (req, res) => {
 	try {
@@ -36,7 +37,7 @@ const getExpenses = async (req, res) => {
       const userId = req.user.id;
       const expenses = await expensesModel.findAll({ where: { userId } });
       return res.status(200).json({ success: true, expenses });
-      
+
     } catch (error) {
         
         console.error("Error in getting expenses:", error);
