@@ -1,3 +1,4 @@
+require('dotenv').config();
 const userModel = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -19,7 +20,12 @@ const registerUser = async (req, res) => {
             return res.status(400).json({ success: false, message: "User already exists" });
         }
 
-
+         if (password.length < 8 || password.length > 20) {
+            return res.status(400).json({
+                success: false,
+                message: "Password must be between 8 and 20 characters"
+            });
+        }
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -32,7 +38,7 @@ const registerUser = async (req, res) => {
 
         const token = jwt.sign(
             { id: newUser.id },
-            process.env.JWT_SECRET,
+              process.env.JWT_SECRET,
             { expiresIn: "1h" }
         );
 

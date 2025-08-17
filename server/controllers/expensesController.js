@@ -3,7 +3,7 @@ const expensesModel = require("../models/expensesModel");
 // Create a new expense
 const createExpenses = async (req, res) => {
 	try {
-		const { category, amount, description } = req.body;
+		const { category, amount, description, date } = req.body;
 
 		if (!category || !amount) {
 			return res.status(400).json({ success: false, message: "All fields are required except description" });
@@ -12,7 +12,7 @@ const createExpenses = async (req, res) => {
 
 const userId = req.user.id;
 
-const expenses =  await expensesModel.create({userId, category, amount, description});
+const expenses =  await expensesModel.create({userId, category, amount, description, date});
 
 if(!expenses){
   return res.status(400).json({success: false, message: "Failed to create expenses"});

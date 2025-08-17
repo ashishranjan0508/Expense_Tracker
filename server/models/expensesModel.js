@@ -2,7 +2,7 @@
 const sequelize = require("../config/db.js");
 const { Sequelize } = require("sequelize");
 
-const Expenses = sequelize.define("Expenses", {
+const Expenses = sequelize.define("expense", {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -26,21 +26,13 @@ const Expenses = sequelize.define("Expenses", {
     },
     description: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     },
     date: {
-        type: Sequelize.DATE,
-        allowNull: false
+        type: Sequelize.DATEONLY,
+        allowNull: true
     },
-    createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
-    },
-    updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
-    }
+    
+
 });
 module.exports = Expenses;
