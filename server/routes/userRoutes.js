@@ -16,4 +16,3 @@ userRouter.post('/expense', userAuth, expensesController.createExpenses);
 userRouter.get('/expense', userAuth, expensesController.getExpenses);
 
 module.exports = userRouter;
-
