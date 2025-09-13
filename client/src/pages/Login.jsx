@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { registerUserApi } from "../services/api";
+import { loginUserApi } from "../services/api";
 
-const Signup = () => {
+const Login = () => { 
+  const [message, setMessage] = useState("");
+  const [isError, setIsError] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
-    userName: "",
     email: "",
     password: ""
   });
@@ -16,33 +16,24 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-      const result = await registerUserApi(formData);
+    const result = await loginUserApi(formData);
 
-      if (result.ok) {
-        alert("Signup successful!");
-      } else {
-        alert(result.error || "Signup failed!");
-      }
+    if (result.ok) {
+      setMessage("Login successful!");
+      setIsError(false);
+      setTimeout(() => setMessage(""), 3000);
+    } else {
+      setMessage(result.data.error || "Login failed!");
+      setIsError(true);
+      setTimeout(() => setMessage(""), 3000);
+    }
   };
 
   return (
     <div className="w-full min-h-screen bg-gradient-to-b from-blue-50 via-white to-green-50 flex flex-col items-center p-4">
-    
       <div className="sm:w-full md:w-1/3 lg:w-1/3 bg-gray-100 shadow-md rounded-lg p-6">
-        <div className="flex justify-center text-2xl font-bold">Signup</div>
+        <div className="flex justify-center text-2xl font-bold">Login</div>
         <form onSubmit={handleSubmit}>
-          <div>
-            <label className="block text-gray-700 mt-4">
-              Name:
-              <input type="text" name="name" required placeholder="Enter your name" className="mt-1 block w-full border border-gray-300 rounded-md p-2" onChange={handleChange} />
-            </label>
-          </div>
-          <div>
-            <label className="block text-gray-700 mt-4">
-              Username:
-              <input type="text" name="userName" required placeholder="Enter your username" className="mt-1 block w-full border border-gray-300 rounded-md p-2" onChange={handleChange} />
-            </label>
-          </div>
           <div className="mb-4">
             <label className="block text-gray-700 mt-4">
               Email:
@@ -55,11 +46,19 @@ const Signup = () => {
               <input type="password" name="password" required placeholder="Enter your password" className="mt-1 block w-full border border-gray-300 rounded-md p-2" onChange={handleChange} />
             </label>
           </div>
-          <button type="submit" className="w-full bg-blue-500 text-white rounded-md p-2 hover:bg-blue-600 cursor-pointer m-4">Signup</button>
+          <button type="submit" className="w-full bg-blue-500 text-white rounded-md p-2 hover:bg-blue-600 cursor-pointer m-4">Login</button>
         </form>
+        {message && (
+          <div className={`text-center mt-4 ${isError ? "text-red-500" : "text-green-500"}`}>
+            {message}
+          </div>
+        )}
+        <span className="block text-center mt-4">
+          Don't have an account? <a href="/signup" className="text-blue-500">Signup</a>
+        </span>
       </div>
     </div>
   );
 };
 
-export default Signup;
+export default Login;

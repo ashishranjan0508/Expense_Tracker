@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import SignupButton from '../components/SignupButton';
+import Button from '../components/Button';
 import logo from '../assets/logoext.svg';
 import applicationImage from '../assets/application_insight.png';
 import FeaturesCard from '../components/FeaturesCard';
@@ -16,7 +16,7 @@ const Home = () => {
     {/* Header */}
     <div className="flex justify-between items-center w-full px-8 py-4 bg-gray-100 shadow-md">
       <img src={logo} alt="Logo" className="h-12 w-auto" />
-      <SignupButton label="Sign Up" />
+      <Button label="Login" onClick={() => navigate("/login")} />
     </div>
 
     {/* Main Section1 */}

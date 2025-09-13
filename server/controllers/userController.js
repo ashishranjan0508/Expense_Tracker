@@ -66,7 +66,7 @@ const loginUser = async (req, res) => {
 
       const existingUser = await userModel.findOne({where: {email}});
       if(!existingUser) {
-        return res.status(400).json({success: false, message : "User not found"});
+        return res.status(401).json({success: false, message : "User not found"});
       }
 
       const isMatch = await bcrypt.compare(password,existingUser.password);
@@ -78,7 +78,7 @@ const loginUser = async (req, res) => {
         );
         return res.status(200).json({success: true, message: "Login successful", token});
       } else {
-        return res.status(400).json({success: false, message: "Invalid credentials"});
+        return res.status(402).json({success: false, message: "Invalid credentials"});
       }
  } catch (error) {
         console.error("Error logging in user:", error);
