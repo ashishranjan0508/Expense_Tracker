@@ -17,11 +17,11 @@ const registerUser = async (req, res) => {
         // Check for existing email
         const existingUser = await userModel.findOne({ where: { email } });
         if (existingUser) {
-            return res.status(400).json({ success: false, message: "User already exists" });
+            return res.status(401).json({ success: false, message: "User already exists" });
         }
 
          if (password.length < 8 || password.length > 20) {
-            return res.status(400).json({
+            return res.status(402).json({
                 success: false,
                 message: "Password must be between 8 and 20 characters"
             });
