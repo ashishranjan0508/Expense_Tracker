@@ -23,8 +23,6 @@ export const registerUserApi = async (formData) => {
 
 export const loginUserApi = async (formData) => {
     try{
-        console.log(formData);
-        console.log(" hola:");
 
     const response = await fetch( `${Baseurl}/users/login`, {
         method: "post",
@@ -35,6 +33,8 @@ export const loginUserApi = async (formData) => {
     })
     
     const data = await response.json();
+    console.log("Login API response data:", data);//-------------------------------
+    
     return { ok: response.ok, data };
 } catch(error) {
     console.log("Error in login api:", error);
@@ -42,3 +42,5 @@ export const loginUserApi = async (formData) => {
 }
 
 }
+
+

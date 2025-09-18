@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { registerUserApi } from "../services/api";
+import { registerUserApi } from "../connectionBW/api";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -19,7 +19,7 @@ const Signup = () => {
       const result = await registerUserApi(formData);
 
       if (result.ok) {
-        alert("Signup successful!");
+        alert("Signup successful! Please login.");
       } else {
         alert(result.error || "Signup failed!");
       }
@@ -57,6 +57,9 @@ const Signup = () => {
           </div>
           <button type="submit" className="w-full bg-blue-500 text-white rounded-md p-2 hover:bg-blue-600 cursor-pointer m-4">Signup</button>
         </form>
+        <span className="block text-center mt-4">
+          Already have an account? <a href="/login" className="text-blue-500">Login</a>
+        </span>
       </div>
     </div>
   );

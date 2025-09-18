@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { loginUserApi } from "../services/api";
+import { loginUserApi } from "../connectionBW/api";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 
 const Login = () => { 
   const [message, setMessage] = useState("");
@@ -8,6 +11,7 @@ const Login = () => {
     email: "",
     password: ""
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({...formData, [e.target.name]: e.target.value});
@@ -18,10 +22,13 @@ const Login = () => {
 
     const result = await loginUserApi(formData);
 
+
     if (result.ok) {
       setMessage("Login successful!");
       setIsError(false);
       setTimeout(() => setMessage(""), 3000);
+      navigate("/dashboard");
+
     } else {
       setMessage(result.data.error || "Login failed!");
       setIsError(true);
@@ -54,7 +61,7 @@ const Login = () => {
           </div>
         )}
         <span className="block text-center mt-4">
-          Don't have an account? <a href="/signup" className="text-blue-500">Signup</a>
+          Don't have an account? <Link href="/signup" className="text-blue-500">Signup</Link>
         </span>
       </div>
     </div>
