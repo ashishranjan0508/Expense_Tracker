@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { registerUserApi } from "../connectionBW/api";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -57,9 +58,10 @@ const Signup = () => {
           </div>
           <button type="submit" className="w-full bg-blue-500 text-white rounded-md p-2 hover:bg-blue-600 cursor-pointer m-4">Signup</button>
         </form>
-        <span className="block text-center mt-4">
-          Already have an account? <a href="/login" className="text-blue-500">Login</a>
-        </span>
+       <span className="block text-center mt-4">
+          Already have an account? <Link to="/login" className="text-blue-500">Login</Link>
+       </span>
+
       </div>
     </div>
   );

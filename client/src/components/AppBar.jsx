@@ -31,11 +31,11 @@ function ResponsiveAppBar() {
     setAnchorElNav(null);
   };
 
-  // 🔥 CHANGED (logout handler)
+  //  CHANGED (logout handler)
   const handleLogout = () => {
     console.log("Logging out...");
     localStorage.removeItem("token");
-    navigate("/");
+    navigate("/", { replace: true });
   };
 
   return (
@@ -104,7 +104,7 @@ function ResponsiveAppBar() {
             ))}
           </Box>
 
-          {/* 🔥 CHANGED: Logout button instead of Avatar */}
+          {/* CHANGED: Logout button instead of Avatar */}
 <Button
   onClick={handleLogout}
   sx={{

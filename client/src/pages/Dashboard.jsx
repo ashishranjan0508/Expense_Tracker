@@ -9,7 +9,7 @@ const Dashboard = () => {
   return (
     <div>
       <ResponsiveAppBar />
-      
+      <div>Dashboard</div>
 
     </div>
   );

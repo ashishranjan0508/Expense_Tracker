@@ -6,7 +6,8 @@ export const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(null);
 
     useEffect(() => {
-        const storedToken = localStorage.getItem("token");
+        const storedToken = async () => await localStorage.getItem("token");
+
         if(storedToken) {
             setToken(storedToken);
         }

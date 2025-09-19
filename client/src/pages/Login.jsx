@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { loginUserApi } from "../connectionBW/api";
-import { useNavigate } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 
@@ -25,6 +25,7 @@ const Login = () => {
 
     if (result.ok) {
       setMessage("Login successful!");
+      localStorage.setItem("token", result.data.token);
       setIsError(false);
       setTimeout(() => setMessage(""), 3000);
       navigate("/dashboard");
@@ -60,9 +61,10 @@ const Login = () => {
             {message}
           </div>
         )}
-        <span className="block text-center mt-4">
-          Don't have an account? <Link href="/signup" className="text-blue-500">Signup</Link>
+       <span className="block text-center mt-4">
+         Don't have an account? <Link to="/signup" className="text-blue-500">Signup</Link>
         </span>
+
       </div>
     </div>
   );

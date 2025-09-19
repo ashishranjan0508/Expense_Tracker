@@ -43,4 +43,25 @@ export const loginUserApi = async (formData) => {
 
 }
 
+// Add Expenses API
 
+export const addExpensesApi = async (formData) => {
+  try {
+    const response = await fetch(`${Baseurl}/users/expense`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(formData), 
+    });
+
+    const data = await response.json();
+    console.log("Add Expenses API response data:", data);
+
+    return { ok: response.ok, data };
+  } catch (error) {
+    console.log("Error in Expenses API", error);
+    return { ok: false, data: { error: "Network error" } };
+  }
+};
