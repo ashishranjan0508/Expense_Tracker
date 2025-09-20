@@ -23,7 +23,7 @@ return res.status(200).json({success: true, expenses});
 
 } catch(error) {
   console.error("Error in creating expenses:", error);
-return res.status(500).json({success: false, message: "Internal server error"});
+return res.status(500).json({success: false, message: "Internal server error at expenses controller"});
 }
 }
 
