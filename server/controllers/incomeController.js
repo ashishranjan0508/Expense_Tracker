@@ -1,15 +1,17 @@
-const expensesModel = require("../models/incomeModel");
+const incomeModel = require("../models/incomeModel");
 
-const incomeController = async (req,res) => {
+
+// Create a new income record for the logged-in user
+const createIncome = async (req,res) => {
     try {
-        const {amount, source, date} = req.body;
+        const {amount, source,note, date} = req.body;
 
         if(!amount || !source) {
             return res.status(400).json({success:false, message:"Amount and source are required"});
         }
         const userId = req.user.id;
 
-        const income = await incomeModel.create({userId, amount, source, date});
+        const income = await incomeModel.create({userId, amount, source,note, date});
 
         if(!income) {
             return res.status(400).json({success: false, message: "Failed to create income record"});
@@ -19,11 +21,11 @@ const incomeController = async (req,res) => {
 
     } catch (error) {
         console.error("Error in income controller:", error);
-        return res.status(500).json({success: false, message: "Internal server error at createincome controller"});
+        return res.status(500).json({success: false, message: "Internal server error at create income controller"});
     }
 }
 
-
+//get income from table for logged in user
 
 const getIncome = async (req, res) => {
     try {
@@ -37,5 +39,5 @@ const getIncome = async (req, res) => {
     }
 }
 
-module.exports = {incomeController, getIncome};
+module.exports = {createIncome, getIncome};
 

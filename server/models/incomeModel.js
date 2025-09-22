@@ -1,8 +1,8 @@
-const sequelize = require('../config/database');
+const sequelize = require("../config/db.js");
+const { Sequelize } = require("sequelize");
 
-const {Sequalize, Sequelize} = require('sequelize');
 
-const income = sequlaize.define(income, {
+const Income = sequelize.define('income', {
     id: {
         type : Sequelize.INTEGER,
         primaryKey:true,
@@ -35,7 +35,9 @@ const income = sequlaize.define(income, {
      
     date: {
         type: Sequelize.DATEONLY,
-        allowNull:true
+        allowNull:false
     }
 
-})
+});
+
+module.exports = Income;
