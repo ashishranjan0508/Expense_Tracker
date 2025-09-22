@@ -10,7 +10,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 
 import logo from '../assets/logoext.svg';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const pages = [
   { label: 'Budget', path: '/budget' },
@@ -20,8 +20,8 @@ const pages = [
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -31,11 +31,35 @@ function ResponsiveAppBar() {
     setAnchorElNav(null);
   };
 
-  //  CHANGED (logout handler)
   const handleLogout = () => {
     console.log("Logging out...");
     localStorage.removeItem("token");
     navigate("/", { replace: true });
+  };
+
+  const getButtonColors = (pageLabel) => {
+    switch (pageLabel) {
+      case 'Budget':
+        return {
+          hover: '#CCCC00', // Darker yellow for hover
+          active: '#FFD700', // Professional yellow for active
+        };
+      case 'Expense':
+        return {
+          hover: '#B22222', // Darker red for hover
+          active: '#DC143C', // Red for active
+        };
+      case 'Income':
+        return {
+          hover: '#006400', // Darker green for hover
+          active: '#008000', // Professional green for active
+        };
+      default:
+        return {
+          hover: 'rgba(255, 255, 255, 0.1)',
+          active: 'rgba(255, 255, 255, 0.2)',
+        };
+    }
   };
 
   return (
@@ -80,7 +104,19 @@ function ResponsiveAppBar() {
                     navigate(page.path);
                     handleCloseNavMenu();
                   }}
-                  sx={{ color: 'black', display: 'block' }}
+                  sx={{ 
+                    color: 'black',
+                    display: 'block',
+                    width: '100%',
+                    justifyContent: 'flex-start',
+                    '&:hover': {
+                      backgroundColor: getButtonColors(page.label).hover,
+                    },
+                    ...(location.pathname === page.path && {
+                      backgroundColor: getButtonColors(page.label).active,
+                      color: 'white', // Ensure text is visible on colored background
+                    }),
+                  }}
                 >
                   {page.label}
                 </Button>
@@ -97,28 +133,37 @@ function ResponsiveAppBar() {
                   navigate(page.path);
                   handleCloseNavMenu();
                 }}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{
+                  my: 2,
+                  color: 'white',
+                  display: 'block',
+                  '&:hover': {
+                    backgroundColor: getButtonColors(page.label).hover,
+                  },
+                  ...(location.pathname === page.path && {
+                    backgroundColor: getButtonColors(page.label).active,
+                  }),
+                }}
               >
                 {page.label}
               </Button>
             ))}
           </Box>
 
-          {/* CHANGED: Logout button instead of Avatar */}
-<Button
-  onClick={handleLogout}
-  sx={{
-    ml: 2,
-    backgroundColor: 'red',   
-    color: 'white',           
-    '&:hover': {
-      backgroundColor: 'darkred',
-    },
-  }}
->
-  Logout
-</Button>
-
+          {/* Logout button */}
+          <Button
+            onClick={handleLogout}
+            sx={{
+              ml: 2,
+              backgroundColor: 'red',
+              color: 'white',
+              '&:hover': {
+                backgroundColor: 'darkred',
+              },
+            }}
+          >
+            Logout
+          </Button>
 
         </Toolbar>
       </Container>

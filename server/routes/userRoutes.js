@@ -11,10 +11,13 @@ const incomeController = require('../controllers/incomeController.js');
 
 userRouter.post('/register', userController.registerUser);
 userRouter.post('/login', userController.loginUser);
+
 userRouter.post('/budget', userAuth, budgetController.createBudget);
 userRouter.get('/budget', userAuth, budgetController.getBudget);
+
 userRouter.post('/expense', userAuth, expensesController.createExpenses);
 userRouter.get('/expense', userAuth, expensesController.getExpenses);
+
 userRouter.post('/income', userAuth, incomeController.createIncome);
 userRouter.get('/income', userAuth, incomeController.getIncome);
 

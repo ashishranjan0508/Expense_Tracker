@@ -26,6 +26,14 @@ const Budgets = sequelize.define("budget", {
     type: Sequelize.STRING,
     allowNull: false
   },
+  description: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  date: {
+    type: Sequelize.DATEONLY,
+    allowNull: false
+  }
   
 });
 module.exports = Budgets;

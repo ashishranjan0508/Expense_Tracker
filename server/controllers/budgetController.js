@@ -3,7 +3,7 @@ const BudgetsModel = require("../models/budgetsModel");
 // Create a new budget
 const createBudget = async (req,res) => {
 	try {
-	const {amount, category} = req.body;
+	const {amount, category, description, date} = req.body;
 
 	if(!amount || !category) {
 		return res.status(400).json({ success: false, message: "All fields are required" });
@@ -11,8 +11,7 @@ const createBudget = async (req,res) => {
 
 	const userId = req.user.id;
 
-	
-    const budget = await BudgetsModel.create({ userId, amount, category });
+    const budget = await BudgetsModel.create({ userId, amount, category, description, date });
 	if(!budget) {
 		return res.status(500).json({ success: false, message: "Failed to create budget" });
 	}
