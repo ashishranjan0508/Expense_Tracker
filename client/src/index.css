@@ -13,3 +13,7 @@
   color: #e0e0e0;
   font-weight: 300;
 }
+
+.my-toast-body {
+  font-size: 1.2rem;
+}

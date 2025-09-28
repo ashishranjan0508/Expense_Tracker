@@ -1,26 +1,13 @@
 import React, { useState } from "react";
 import ResponsiveAppBar from "../components/AppBar.jsx";
-import { addExpensesApi } from "../connectionBW/api.jsx";
+import { addExpensesApi } from "../connectionBW/service.js";
+import { predefinedCategoriesExpenses } from "../constants/expensesConstants.js";
+import { toast } from 'react-toastify';
 
 const Expenses = () => {
   const [category, setCategory] = useState("");
   const [customCategory, setCustomCategory] = useState("");
   const [clicked, setClicked] = useState(false);
-  const [message, setMessage] = useState("");
-  const [isError, setIsError] = useState(false);
-
-  const predefinedCategories = [
-    "Food",
-    "Social Life",
-    "Transport",
-    "Household",
-    "Apparel",
-    "Beauty",
-    "Health",
-    "Education",
-    "Gift",
-    "Other",
-  ];
 
   const handleChange = (e) => {
     setCategory(e.target.value);
@@ -43,17 +30,28 @@ const Expenses = () => {
     console.log("Submitted:", formData);
 
     const result = await addExpensesApi(formData);
+    const toastId = toast.loading("Adding Income...");
 
     if (result.ok) {
-      setMessage("Expense added successfully!");
-      setIsError(false);
+      toast.update(toastId, {
+        render : "Expenses added successfully",
+        type : "success",
+        isLoading : false,
+        autoClose : 3000,
+      });
+
+      e.target.reset();
+      setCategory("");
+      setCustomCategory("");
+
     } else {
-      setMessage(result.data.error || "Expense add failed!"); // ✅ fixed message
-      setIsError(true);
+      toast.update(toastId, {
+        render : result.data.error || "Failed to add expenses!",
+        type : "error",
+        isLoading : false,
+        autoClose : 3000,
+      })
     }
-
-    setTimeout(() => setMessage(""), 3000);
-
     setClicked(true);
     setTimeout(() => setClicked(false), 700);
   };
@@ -90,7 +88,7 @@ const Expenses = () => {
                 required
               >
                 <option value="">-- Select Category --</option>
-                {predefinedCategories.map((cat) => (
+                {predefinedCategoriesExpenses.map((cat) => (
                   <option key={cat} value={cat}>
                     {cat}
                   </option>
@@ -119,17 +117,6 @@ const Expenses = () => {
                 name="description"
               />
             </div>
-
-            {/* Messages */}
-            {message && (
-              <div
-                className={`text-center mt-4 ${
-                  isError ? "text-red-500" : "text-green-500"
-                }`}
-              >
-                {message}
-              </div>
-            )}
 
             {/* Submit */}
             <button

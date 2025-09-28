@@ -1,22 +1,13 @@
 import React, { useState } from "react";
 import ResponsiveAppBar from "../components/AppBar.jsx";
-import { addIncomeApi } from "../connectionBW/api.jsx";
+import { addIncomeApi } from "../connectionBW/service.js";
+import { predefinedSourcesIncome } from "../constants/incomeConstants.js";
+import { toast } from 'react-toastify';
 
 const Incomes = () => {
   const [source, setSource] = useState("");
   const [customSource, setCustomSource] = useState("");
   const [clicked, setClicked] = useState(false);
-  const [message, setMessage] = useState("");
-  const [isError, setIsError] = useState(false);
-
-  const predefinedSources = [
-    "Salary",
-    "Business",
-    "Investments",
-    "Allowance",
-    "Petty Cash",
-    "Other",
-  ];
 
   const handleChange = (e) => {
     setSource(e.target.value);
@@ -37,19 +28,29 @@ const Incomes = () => {
       date: e.target.date.value,
     };
 
-    console.log("Submitted:", formData);
+    const toastId = toast.loading("Adding income...");
 
     const result = await addIncomeApi(formData);
 
     if (result.ok) {
-      setMessage("Income added successfully!");
-      setIsError(false);
+      toast.update(toastId, {
+        render: "Income added successfully!",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+      });
+      // Reset form fields for a better user experience
+      e.target.reset();
+      setSource("");
+      setCustomSource("");
     } else {
-      setMessage(result.data.error || "Income add failed!"); // ✅ fixed message
-      setIsError(true);
+      toast.update(toastId, {
+        render: result.data.error || "Failed to add income!",
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+      });
     }
-
-    setTimeout(() => setMessage(""), 3000);
 
     setClicked(true);
     setTimeout(() => setClicked(false), 700);
@@ -69,7 +70,7 @@ const Incomes = () => {
               <input
                 className="border border-gray-300 p-2 rounded w-full"
                 type="number"
-                step="0.01" // ✅ allows decimals
+                step="0.01"
                 placeholder="Enter amount"
                 name="amount"
                 required
@@ -87,7 +88,7 @@ const Incomes = () => {
                 required
               >
                 <option value="">-- Select Source --</option>
-                {predefinedSources.map((src) => (
+                {predefinedSourcesIncome.map((src) => (
                   <option key={src} value={src}>
                     {src}
                   </option>
@@ -98,7 +99,7 @@ const Incomes = () => {
                 <input
                   type="text"
                   className="border border-gray-300 p-2 rounded w-full mt-2"
-                  placeholder="Enter custom category"
+                  placeholder="Enter custom source"
                   value={customSource}
                   onChange={(e) => setCustomSource(e.target.value)}
                   required
@@ -117,6 +118,7 @@ const Incomes = () => {
               />
             </div>
 
+            {/* Date */}
             <div>
               <label className="block mb-1">Date</label>
               <input
@@ -126,17 +128,6 @@ const Incomes = () => {
                 required
               />
             </div>
-
-            {/* Messages */}
-            {message && (
-              <div
-                className={`text-center mt-4 ${
-                  isError ? "text-red-500" : "text-green-500"
-                }`}
-              >
-                {message}
-              </div>
-            )}
 
             {/* Submit */}
             <button

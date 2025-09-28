@@ -1,26 +1,15 @@
 import React, { useState } from "react";
 import ResponsiveAppBar from "../components/AppBar.jsx";
-import { addBudgetApi } from "../connectionBW/api.jsx";
+import { addBudgetApi } from "../connectionBW/service.js";
+import { predefinedCategoriesBudget } from "../constants/budgetConstants.js";
+import { toast } from "react-toastify";
+
 
 const Budgets = () => {
   const [category, setCategory] = useState("");
   const [customCategory, setCustomCategory] = useState("");
   const [clicked, setClicked] = useState(false);
-  const [message, setMessage] = useState("");
-  const [isError, setIsError] = useState(false);
 
-  const predefinedCategories = [
-    "Food",
-    "Social Life",
-    "Transport",
-    "Household",
-    "Apparel",
-    "Beauty",
-    "Health",
-    "Education",
-    "Gift",
-    "Other",
-  ];
 
   const handleChange = (e) => {
     setCategory(e.target.value);
@@ -42,19 +31,29 @@ const Budgets = () => {
     };
 
     console.log("Submitted:", formData);
-
+     const toastId = toast.loading("Adding Budget")
     const result = await addBudgetApi(formData);
 
     if (result.ok) {
-      setMessage("Budget added successfully!");
-      setIsError(false);
+      toast.update(toastId, {
+        render : "Budget added successfully",
+        type : "success", 
+        isLoading : false, 
+        autoClose : 3000,
+      });
+
+      e.target.reset();
+      setCategory("");
+      setCustomCategory("");
+
     } else {
-      setMessage(result.data.error || "Budget add failed!"); // ✅ fixed message
-      setIsError(true);
+      toast.update(toastId, {
+        render : result.data.error || "Failed to add budget!",
+        type : "error",
+        isLoading : false,
+        autoClose : 3000,
+      })      
     }
-
-    setTimeout(() => setMessage(""), 3000);
-
     setClicked(true);
     setTimeout(() => setClicked(false), 700);
   };
@@ -91,7 +90,7 @@ const Budgets = () => {
                 required
               >
                 <option value="">-- Select Category --</option>
-                {predefinedCategories.map((cat) => (
+                {predefinedCategoriesBudget.map((cat) => (
                   <option key={cat} value={cat}>
                     {cat}
                   </option>
@@ -130,17 +129,6 @@ const Budgets = () => {
                 required
               />
             </div>
-
-            {/* Messages */}
-            {message && (
-              <div
-                className={`text-center mt-4 ${
-                  isError ? "text-red-500" : "text-green-500"
-                }`}
-              >
-                {message}
-              </div>
-            )}
 
             {/* Submit */}
             <button

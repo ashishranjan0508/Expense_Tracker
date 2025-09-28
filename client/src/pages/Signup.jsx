@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { registerUserApi } from "../connectionBW/api";
+import { registerUserApi } from "../connectionBW/service.js";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -20,9 +21,9 @@ const Signup = () => {
       const result = await registerUserApi(formData);
 
       if (result.ok) {
-        alert("Signup successful! Please login.");
+        toast.success("Signup successful! Please login.");
       } else {
-        alert(result.error || "Signup failed!");
+        toast.error(result.error || "Signup failed!");
       }
   };
 
