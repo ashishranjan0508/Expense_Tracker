@@ -24,7 +24,7 @@ const Login = () => {
     const toastId = toast.loading("Logging in...");
 
     const result = await loginUserApi(formData);
-
+    console.log(result);
     if (result.ok) {
       toast.update(toastId, {
         render: "Login successful!",

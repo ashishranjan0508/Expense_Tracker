@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ResponsiveAppBar from "../components/AppBar.jsx";
 import { addBudgetApi } from "../connectionBW/service.js";
 import { predefinedCategoriesBudget } from "../constants/budgetConstants.js";
@@ -32,7 +32,7 @@ const Budgets = () => {
 
     console.log("Submitted:", formData);
      const toastId = toast.loading("Adding Budget")
-    const result = await addBudgetApi(formData);
+     const result = await addBudgetApi(formData);
 
     if (result.ok) {
       toast.update(toastId, {

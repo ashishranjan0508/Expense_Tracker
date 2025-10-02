@@ -13,9 +13,12 @@ import logo from '../assets/logoext.svg';
 import { useNavigate, useLocation } from "react-router-dom";
 
 const pages = [
-  { label: 'Budget', path: '/budget' },
-  { label: 'Expense', path: '/expenses' },
-  { label: 'Income', path: '/income' },
+  { label: 'Add Budget', path: '/budget' },
+  { label: 'Add Expense', path: '/expenses' },
+  { label: 'Add Income', path: '/income' },
+  { label: 'Dashboard', path: '/dashboard' },
+
+
 ];
 
 function ResponsiveAppBar() {
@@ -39,20 +42,26 @@ function ResponsiveAppBar() {
 
   const getButtonColors = (pageLabel) => {
     switch (pageLabel) {
-      case 'Budget':
+      case 'Add Budget':
         return {
           hover: '#CCCC00', // Darker yellow for hover
           active: '#FFD700', // Professional yellow for active
         };
-      case 'Expense':
+      case 'Add Expense':
         return {
           hover: '#B22222', // Darker red for hover
           active: '#DC143C', // Red for active
         };
-      case 'Income':
+      case 'Add Income':
         return {
           hover: '#006400', // Darker green for hover
           active: '#008000', // Professional green for active
+        };
+
+        case 'Dashboard':
+        return {
+          hover: '#000080', 
+          active: '#0000FF',
         };
       default:
         return {

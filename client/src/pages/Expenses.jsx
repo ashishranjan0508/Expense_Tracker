@@ -8,6 +8,7 @@ const Expenses = () => {
   const [category, setCategory] = useState("");
   const [customCategory, setCustomCategory] = useState("");
   const [clicked, setClicked] = useState(false);
+  
 
   const handleChange = (e) => {
     setCategory(e.target.value);
@@ -25,6 +26,7 @@ const Expenses = () => {
       amount: e.target.amount.value,
       category: finalCategory,
       description: e.target.description.value,
+      date: e.target.date.value
     };
 
     console.log("Submitted:", formData);
@@ -118,6 +120,16 @@ const Expenses = () => {
               />
             </div>
 
+            {/* Date */}
+           <div>
+              <label className="block mb-1">Date</label>
+              <input
+                className="border border-gray-300 p-2 rounded w-full"
+                type="date"
+                name="date"
+                required
+              />
+            </div>
             {/* Submit */}
             <button
               type="submit"
