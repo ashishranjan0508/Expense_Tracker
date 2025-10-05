@@ -1,9 +1,10 @@
-
 import { useState } from "react";
 import { loginUserApi } from "../connectionBW/service.js";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
+import { AuthContext } from "../context/AuthContext.jsx";
+import { useContext } from "react";
 
 
 
@@ -14,6 +15,7 @@ const Login = () => {
     password: ""
   }); 
   const navigate = useNavigate();
+  const { setToken } = useContext(AuthContext);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -35,8 +37,8 @@ const Login = () => {
       });
 
       localStorage.setItem("token", result.data.token);
+      setToken(result.data.token);
       navigate("/dashboard");
-
     } else {
       toast.update(toastId, {
         render: result.data.error || "Login failed!",

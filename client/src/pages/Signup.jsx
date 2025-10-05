@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { registerUserApi } from "../connectionBW/service.js";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 
 const Signup = () => {
+
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     userName: "",
@@ -22,6 +25,7 @@ const Signup = () => {
       const result = await registerUserApi(formData);
 
       if (result.ok) {
+        navigate("/login")
         toast.success("Signup successful! Please login.");
       } else {
         toast.error(result.error || "Signup failed!");

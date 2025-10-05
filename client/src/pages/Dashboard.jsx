@@ -31,6 +31,15 @@ const Dashboard = () => {
      }
   }
 
+    const budgethandler = async () => {
+     const result = await getBudgetApi();
+     if(!result.ok) {
+      toast.error("Failed to get data");
+     } else {
+      navigate("/viewBudget", {state: {budgetData : result.data}} )
+     }
+  }
+
   // Report card handler------------.........-------------
   const reporthandler = async () => {
      const resultIncome = await getIncomeApi();
@@ -68,6 +77,12 @@ const Dashboard = () => {
             label={{title: "Expenses", description:"See where your money goes"}} 
           />
           
+          <DashboardCard 
+            onClick={ budgethandler}
+            color="yellow" 
+            label={{title: "Budget", description:"Set where your money should go."}} 
+          />
+
           <DashboardCard 
             onClick={ reporthandler }
             color="blue" 

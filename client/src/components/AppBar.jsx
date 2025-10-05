@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -7,7 +7,7 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-
+import { AuthContext } from '../context/AuthContext';
 import logo from '../assets/logoext.svg';
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -24,6 +24,7 @@ function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const navigate = useNavigate();
   const location = useLocation();
+  const { setToken } = useContext(AuthContext);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -34,8 +35,10 @@ function ResponsiveAppBar() {
   };
 
   const handleLogout = () => {
+   // navigate("/", { replace: true });
     localStorage.removeItem("token");
-    navigate("/", { replace: true });
+    setToken(null);
+    
   };
 
   const getButtonColors = (pageLabel) => {

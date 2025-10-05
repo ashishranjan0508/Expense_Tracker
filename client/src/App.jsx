@@ -1,16 +1,16 @@
 import { Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./context/ProtectedRoute.jsx";
-import { PUBLIC_ROUTES, PROTECTED_ROUTES } from "./config/route-config.js";
+import { PUBLIC_ROUTES, PROTECTED_ROUTES, ALL_ROUTES } from "./config/route-config.js";
 import Home from "./pages/Home.jsx";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home/>} />
 
-        {PROTECTED_ROUTES.map(({ path, component: Component, isProtected }) => {
+        {ALL_ROUTES.map(({ path, component: Component, isProtected }) => {
           return (
             <Route
               key={path}
