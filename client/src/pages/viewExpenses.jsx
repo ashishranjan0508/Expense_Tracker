@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import ResponsiveAppBar from '../components/AppBar';
 
+
 const viewExpenses = () => {
 
   const location = useLocation();
@@ -30,7 +31,8 @@ const viewExpenses = () => {
         <h1 className="text-3xl font-bold text-gray-800">Expenses Details</h1>
         <button
           onClick={() => navigate(-1)}
-          className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition-colors"
+          className="bg-indigo-600 hover:bg-indigo-700 
+          text-white font-bold py-2 px-4 rounded-lg transition-colors cursor-pointer"
         >
           &larr; Go Back
         </button>
@@ -85,6 +87,7 @@ const viewExpenses = () => {
      
       </div>
     </div>
+
   </div>
   );
 }

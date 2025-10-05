@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ResponsiveAppBar from "../components/AppBar";
 
+
   const ViewIncome = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -31,7 +32,8 @@ import ResponsiveAppBar from "../components/AppBar";
         <h1 className="text-3xl font-bold text-gray-800">Income Details</h1>
         <button
           onClick={() => navigate(-1)}
-          className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition-colors"
+          className="bg-indigo-600 hover:bg-indigo-700
+           text-white font-bold py-2 px-4 rounded-lg transition-colors cursor-pointer"
         >
           &larr; Go Back
         </button>
@@ -85,6 +87,7 @@ import ResponsiveAppBar from "../components/AppBar";
         </table>
       </div>
     </div>
+
   </div>
   );
 };

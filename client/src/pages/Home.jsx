@@ -6,6 +6,7 @@ import applicationImage from '../assets/application_insight.png';
 import FeaturesCard from '../components/FeaturesCard';
 import ReviewCard from '../components/ReviewCard';
 import FrqCard from '../components/FrqCard';
+import Footer from '../components/Footer';
 
 
 const Home = () => {
@@ -16,7 +17,7 @@ const Home = () => {
     {/* Header */}
     <div className="flex justify-between items-center w-full px-8 py-4 bg-gray-100 shadow-md">
       <img src={logo} alt="Logo" className="h-12 w-auto" />
-      <Button label="Login" onClick={() => navigate("/login")} />
+      <Button label="Login/ Signup" onClick={() => navigate("/login")} />
     </div>
 
     {/* Main Section1 */}
@@ -48,42 +49,22 @@ const Home = () => {
   <div className="text-2xl font-semibold text-center mb-8">Reviews</div>
   <div className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-12 lg:gap-20">
     <ReviewCard label={{ name: "Ashish Ranjan", rating: 5, comment: "Excellent app for tracking expenses! It helps me stay on top of my budget every day." }} />
-    <ReviewCard label={{ name: "Sam Altman", rating: 4, comment: "Very useful for managing my budget. It keeps my finances organized and stress-free." }} />
-    <ReviewCard label={{ name: "Mahatma Gandhi", rating: 5, comment: "A must-have app for everyone! It makes tracking expenses simple and efficient." }} />
+    <ReviewCard label={{ name: "Chanel", rating: 4, comment: "Very useful for managing my budget. It keeps my finances organized and stress-free." }} />
+    <ReviewCard label={{ name: "Reyansh", rating: 5, comment: "A must-have app for everyone! It makes tracking expenses simple and efficient." }} />
   </div>
 </div>
 
      {/*Frequently Asked Questions Section. I will do it later*/}
 
-    <FrqCard question="How does expense tracking work?" answer="Our app allows you to manually enter expenses or link your bank account for automatic tracking." />
-    <FrqCard question="How does expense tracking work?" answer="Our app allows you to manually enter expenses or link your bank account for automatic tracking." />
-    <FrqCard question="How does expense tracking work?" answer="Our app allows you to manually enter expenses or link your bank account for automatic tracking." />
-    <FrqCard question="How does expense tracking work?" answer="Our app allows you to manually enter expenses or link your bank account for automatic tracking." />
-    <FrqCard question="How does expense tracking work?" answer="Our app allows you to manually enter expenses or link your bank account for automatic tracking." />
+    <FrqCard question="How do I add a new expense or income?" answer="After logging in, you will find an 'Add Expense' button on the dashboard." />
+    <FrqCard question="Can I create my own custom categories?" answer="Yes, if the default options aren't suitable, you can select 'Other' to write your own custom category." />
+    <FrqCard question="How can I see a summary of my spending?" answer="Navigate to the 'Reports' or 'Dashboard' tab to view charts and detailed breakdowns of your spending by category, date range, or payment method." />
+    <FrqCard question="Is it possible to set a monthly budget?" answer="Absolutely. In the 'Budgets' section, you can set a total monthly budget or create specific budgets for different categories to help you stay on track." />
+    <FrqCard question="Is my financial data secure?" answer="Yes, your data is safe with us. " />
     
 
     {/* Footer */}
-       
-      <div>
-        <footer className="w-full bg-gray-100 text-gray-600 py-6 mt-10">
-  <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
-    
-    <div className="mb-4 md:mb-0">
-      © 2025 Expense Tracker. All rights reserved.
-    </div>
-
-    <div className="flex flex-col sm:flex-row gap-4">
-      
-      <div onClick={() => navigate('/privacy')} className="hover:text-blue-600 cursor-pointer">Privacy Policy</div>
-      <div onClick={() => navigate('/terms')} className="hover:text-blue-600 cursor-pointer">Terms of Service</div>
-      <div onClick={() => window.location.href = "mailto:support@expensetracker.com"} className="hover:text-blue-600 cursor-pointer">Contact Support</div>
-    </div>
-  </div>
-</footer>
-
-      </div> 
- 
-
+    <Footer/>
   </div>
 );
 
