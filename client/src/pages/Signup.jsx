@@ -59,7 +59,7 @@ const Signup = () => {
           <div className="mb-4">
             <label className="block text-gray-700 mt-4">
               Password:
-              <input type="password" name="password" required placeholder="Enter your password" className="mt-1 block w-full border border-gray-300 rounded-md p-2" onChange={handleChange} />
+              <input type="password" name="password" required placeholder="The password must contain at least 8 characters." className="mt-1 block w-full border border-gray-300 rounded-md p-2" onChange={handleChange} />
             </label>
           </div>
           <button type="submit" className="w-full bg-blue-500 text-white rounded-md p-2 hover:bg-blue-600 cursor-pointer m-4">Signup</button>
