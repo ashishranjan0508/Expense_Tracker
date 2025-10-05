@@ -24,7 +24,7 @@ const ViewIncome = lazy(() => {
 const ViewExpenses = lazy(() => {
   return import("../pages/ViewExpenses.jsx");
 });
-const viewBudget = lazy(() => {
+const ViewBudget = lazy(() => {
   return import("../pages/ViewBudget.jsx");
 });
 const ViewReport = lazy(() => {
@@ -43,7 +43,7 @@ export const PROTECTED_ROUTES = [
   { path: "/income", component: Income, isProtected: true },
   { path: "/viewIncome", component: ViewIncome, isProtected: true },
   { path: "/viewExpenses", component: ViewExpenses, isProtected: true },
-  { path: "/viewBudget", component: viewBudget, isProtected: true },
+  { path: "/viewBudget", component: ViewBudget, isProtected: true },
   { path: "/viewReport", component: ViewReport, isProtected: true },
 ];
 
