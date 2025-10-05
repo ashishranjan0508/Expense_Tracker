@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 
 
 
+
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -88,6 +89,7 @@ const Login = () => {
           Don't have an account? <Link to="/signup" className="text-blue-500">Signup</Link>
         </span>
       </div>
+     
     </div>
   );
 };

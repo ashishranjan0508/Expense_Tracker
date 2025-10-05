@@ -1,9 +1,10 @@
 import ResponsiveAppBar from '../components/AppBar.jsx';
 import DashboardCard from '../components/DashboardCard.jsx';
 import { useNavigate } from 'react-router-dom';
-import { getIncomeApi } from '../connectionBW/service.js';
+import { getBudgetApi, getIncomeApi } from '../connectionBW/service.js';
 import { getExpensesApi } from '../connectionBW/service.js';
 import { toast } from 'react-toastify';
+
 
 
 const Dashboard = () => {
@@ -30,6 +31,24 @@ const Dashboard = () => {
      }
   }
 
+  // Report card handler------------.........-------------
+  const reporthandler = async () => {
+     const resultIncome = await getIncomeApi();
+     const resultExpenses = await getExpensesApi();
+     const resultBudget = await getBudgetApi();
+
+     if(!resultIncome.ok && !resultExpenses && !resultBudget) {
+      toast.error("Failed to generate report");  
+     } else {
+      navigate("/viewReport", {state: {
+         incomeData: resultIncome.data,
+         expensesData: resultExpenses.data,
+         budgetData: resultBudget.data
+         }})
+     }
+  }
+
+
   return (
     <div>
       <ResponsiveAppBar />
@@ -50,13 +69,14 @@ const Dashboard = () => {
           />
           
           <DashboardCard 
-            onClick={() => navigate("/viewReport")}
+            onClick={ reporthandler }
             color="blue" 
             label={{title: "Reports", description:"Generate financial reports"}} 
           />
           
         </div>
       </div>
+  
     </div>
   );
 };

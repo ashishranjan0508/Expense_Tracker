@@ -4,6 +4,7 @@ import { addExpensesApi } from "../connectionBW/service.js";
 import { predefinedCategoriesExpenses } from "../constants/expensesConstants.js";
 import { toast } from 'react-toastify';
 
+
 const Expenses = () => {
   const [category, setCategory] = useState("");
   const [customCategory, setCustomCategory] = useState("");
@@ -141,6 +142,7 @@ const Expenses = () => {
           </form>
         </div>
       </div>
+   
     </div>
   );
 };

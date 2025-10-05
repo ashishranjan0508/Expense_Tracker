@@ -3,6 +3,7 @@ import { registerUserApi } from "../connectionBW/service.js";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
+
 const Signup = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -64,6 +65,7 @@ const Signup = () => {
        </span>
 
       </div>
+   
     </div>
   );
 };

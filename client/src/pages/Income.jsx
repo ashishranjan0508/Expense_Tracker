@@ -4,6 +4,7 @@ import { addIncomeApi } from "../connectionBW/service.js";
 import { predefinedSourcesIncome } from "../constants/incomeConstants.js";
 import { toast } from 'react-toastify';
 
+
 const Incomes = () => {
   const [source, setSource] = useState("");
   const [customSource, setCustomSource] = useState("");
@@ -140,6 +141,7 @@ const Incomes = () => {
           </form>
         </div>
       </div>
+   
     </div>
   );
 };

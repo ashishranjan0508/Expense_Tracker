@@ -5,6 +5,7 @@ import { predefinedCategoriesBudget } from "../constants/budgetConstants.js";
 import { toast } from "react-toastify";
 
 
+
 const Budgets = () => {
   const [category, setCategory] = useState("");
   const [customCategory, setCustomCategory] = useState("");
@@ -141,6 +142,7 @@ const Budgets = () => {
           </form>
         </div>
       </div>
+ 
     </div>
   );
 };
