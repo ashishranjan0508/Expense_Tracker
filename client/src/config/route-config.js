@@ -28,7 +28,7 @@ const ViewBudget = lazy(() => {
   return import("../pages/viewBudget.jsx");
 });
 const ViewReport = lazy(() => {
-  return import("../pages/ViewReport.jsx");
+  return import("../pages/viewReport.jsx");
 });
 
 export const PUBLIC_ROUTES = [
