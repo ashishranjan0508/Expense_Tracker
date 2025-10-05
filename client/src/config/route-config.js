@@ -22,10 +22,10 @@ const ViewIncome = lazy(() => {
   return import("../pages/ViewIncome.jsx");
 });
 const ViewExpenses = lazy(() => {
-  return import("../pages/ViewExpenses.jsx");
+  return import("../pages/viewExpenses.jsx");
 });
 const ViewBudget = lazy(() => {
-  return import("../pages/ViewBudget.jsx");
+  return import("../pages/viewBudget.jsx");
 });
 const ViewReport = lazy(() => {
   return import("../pages/ViewReport.jsx");
