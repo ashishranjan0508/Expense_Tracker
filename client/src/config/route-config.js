@@ -4,7 +4,7 @@ const Signup = lazy(() => {
   return import("../pages/Signup.jsx");
 });
 const Login = lazy(() => {
-  return import("../pages/login.jsx");
+  return import("../pages/Login.jsx");
 });
 const Dashboard = lazy(() => {
   return import("../pages/Dashboard.jsx");
