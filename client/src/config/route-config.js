@@ -1,30 +1,46 @@
-import { lazy } from "react"
+import { lazy } from "react";
 
-const Signup = lazy(() => { return (import('../pages/Signup.jsx')) });
-const Login = lazy(() => { return (import('../pages/login.jsx')) });
-const Dashboard = lazy( () => { return (import('../pages/Dashboard.jsx')) });
-const Budget = lazy( () => { return (import('../pages/Budget.jsx')) });
-const Expenses = lazy( () => { return (import('../pages/Expenses.jsx')) });
-const Income = lazy( () => { return (import('../pages/Income.jsx')) });
-const ViewIncome = lazy( () => { return (import('../pages/ViewIncome.jsx')) });
-const ViewExpenses = lazy( () => { return (import('../pages/ViewExpenses.jsx')) });
-const ViewReport = lazy( () => { return (import('../pages/ViewReport.jsx')) });
-
+const Signup = lazy(() => {
+  return import("../pages/Signup.jsx");
+});
+const Login = lazy(() => {
+  return import("../pages/login.jsx");
+});
+const Dashboard = lazy(() => {
+  return import("../pages/Dashboard.jsx");
+});
+const Budget = lazy(() => {
+  return import("../pages/Budget.jsx");
+});
+const Expenses = lazy(() => {
+  return import("../pages/Expenses.jsx");
+});
+const Income = lazy(() => {
+  return import("../pages/Income.jsx");
+});
+const ViewIncome = lazy(() => {
+  return import("../pages/ViewIncome.jsx");
+});
+const ViewExpenses = lazy(() => {
+  return import("../pages/ViewExpenses.jsx");
+});
+const ViewReport = lazy(() => {
+  return import("../pages/ViewReport.jsx");
+});
 
 export const PUBLIC_ROUTES = [
-    {path : '/signup', component: Signup},
-    {path : '/login', component: Login},
-]
+  { path: "/signup", component: Signup, isProtected: false },
+  { path: "/login", component: Login, isProtected: false },
+];
 
 export const PROTECTED_ROUTES = [
-    {path : '/dashboard', component : Dashboard},
-    {path : '/budget', component : Budget},
-    {path : '/expenses', component : Expenses},
-    {path : '/income', component : Income},
-    {path : '/viewIncome', component : ViewIncome},
-    {path : '/viewExpenses', component : ViewExpenses},
-    {path : '/viewReport', component : ViewReport},
-    
+  { path: "/dashboard", component: Dashboard, isProtected: true },
+  { path: "/budget", component: Budget, isProtected: true },
+  { path: "/expenses", component: Expenses, isProtected: true },
+  { path: "/income", component: Income, isProtected: true },
+  { path: "/viewIncome", component: ViewIncome, isProtected: true },
+  { path: "/viewExpenses", component: ViewExpenses, isProtected: true },
+  { path: "/viewReport", component: ViewReport, isProtected: true },
+];
 
-]
-
+export const ALL_ROUTES = [...PUBLIC_ROUTES, ...PROTECTED_ROUTES];
