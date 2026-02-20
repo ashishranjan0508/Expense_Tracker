@@ -4,10 +4,12 @@ require("dotenv").config(); // Load environment variables
 const sequelize = require("./config/db.js");
 
 // 2. Import ALL your models 
-const User = require("./models/user.js"); 
-const Budgets = require("./models/budget.js");
-const Expenses = require("./models/expense.js");
-const Income = require("./models/income.js");
+// Change these lines in sync.js:
+const User = require("./models/userModel.js"); 
+const Budgets = require("./models/budgetsModel.js");
+const Expenses = require("./models/expensesModel.js");
+const Income = require("./models/incomeModel.js");
+
 
 const syncDatabase = async () => {
     try {
